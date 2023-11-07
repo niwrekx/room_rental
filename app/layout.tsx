@@ -1,12 +1,17 @@
 import type { Metadata } from 'next';
 import {Poppins} from "next/font/google";
 import './globals.css'
-import Navbar from './components/navbar/Navbar';
-import ClientOnly from './components/ClientOnly';
-import RegisterModal from './components/modals/RegisterModal';
+import Navbar from '@/app/components/navbar/Navbar';
+import ClientOnly from '@/app/components/ClientOnly';
+import RegisterModal from '@/app/components/modals/RegisterModal';
+import LoginModal from './components/modals/LoginModal';
+import RentModal from './components/modals/RentModal';
+
+import ToasterProvider from '@/app/providers/ToasterProvider';
+
+import getCurrentUser from './actions/getCurrentUser';
 
 
-// const inter = Inter({ subsets: ['latin'] })
 
 const font = Poppins ({ 
   subsets: ['latin'],
@@ -18,19 +23,28 @@ export const metadata: Metadata = {
   description: 'Project clone sample by niwrek',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // get current user
+  const currentUser = await getCurrentUser();
+
+
   return (
     <html lang="en">
       <body className={font.className}>
         <ClientOnly>
+          <ToasterProvider />
+          <RentModal />
+          <LoginModal />
           <RegisterModal />
-          <Navbar />
+          <Navbar currentUser={currentUser}/>
         </ClientOnly>
-        {children}
+        <div className="pb-20 pt-28">
+          {children}
+        </div>        
       </body>
     </html>
   )

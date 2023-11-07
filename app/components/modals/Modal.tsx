@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import {IoMdClose} from "react-icons/io";
+
 import Button from "../Button";
 
 
@@ -19,13 +20,13 @@ interface ModelProps{
 }
 
 const Modal: React.FC<ModelProps> = ({
-    isOpen,
-    onClose,
-    onSubmit,
-    title,
-    body,
-    footer,
-    actionLabel,
+    isOpen, 
+    onClose, 
+    onSubmit, 
+    title, 
+    body, 
+    actionLabel, 
+    footer, 
     disabled,
     secondaryAction,
     secondaryActionLabel
@@ -62,7 +63,7 @@ const Modal: React.FC<ModelProps> = ({
 
     //secondary action
     const handleSecondaryAction = useCallback(()=>{
-        if (disabled || secondaryAction){
+        if (disabled || !secondaryAction){
             return;
         }
         secondaryAction();
@@ -148,14 +149,14 @@ const Modal: React.FC<ModelProps> = ({
                                 </button>
 
                                 {/* title */}
-                                <h3 className="text-lg font-semibold">
+                                <div className="text-lg font-semibold">
                                     {title}
-                                </h3>
+                                </div>
                             </div>
                                 {/* body */}
-                                <p className="relative p-6 flex-auto">
+                                <div className="relative p-6 flex-auto">
                                     {body}
-                                </p>
+                                </div>
                                 {/*-----footer ------*/}
                                 <div className="flex flex-col gap-2 p-6">
                                     <div className="flex flex-row items-center gap-4 w-full">
@@ -175,6 +176,7 @@ const Modal: React.FC<ModelProps> = ({
                                             onClick={handleSubmit}
                                         />
                                     </div>
+                                    {footer}
                                 </div>
                         </div>
                     </div>
