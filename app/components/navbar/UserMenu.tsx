@@ -19,6 +19,8 @@ interface UserMenuProps{
     currentUser?: SafeUser | null;
 }
 
+
+
 const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
 
     const router = useRouter();
@@ -35,8 +37,15 @@ const UserMenu:React.FC<UserMenuProps> = ({currentUser}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = useCallback (()=>{
-        setIsOpen((value) => !value);
-    },[])
+        setIsOpen((value) => !value); 
+        setTimeout(() => {
+            setIsOpen(false);
+        }, 1500); 
+    },[]);
+
+
+
+    
 
     // ensure user is login
     const onRent = useCallback(()=>{

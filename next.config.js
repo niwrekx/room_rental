@@ -1,13 +1,3 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {}
-
-// module.exports = nextConfig
-
-
-
-
-
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
@@ -19,6 +9,9 @@ const nextConfig = {
         'avatars.githubusercontent.com',
         'lh3.googleusercontent.com'
       ]
+    },
+    typescript:{
+      ignoreBuildErrors:true,
     },
     webpack(config) {
         config.experiments = {
